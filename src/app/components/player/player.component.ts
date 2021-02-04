@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
 
+  playerName = '';
+  players: string[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onKeyUp(target: any): void {
+    this.playerName = target.value;
+  }
+
+  onButtonClicked(): void {
+    this.players.push(this.playerName);
+    this.playerName = '';
+    console.log(this.players)
+  }
 }
