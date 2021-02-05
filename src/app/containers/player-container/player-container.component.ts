@@ -13,4 +13,8 @@ export class PlayerContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onButtonClicked(target: any): void {
+    this.players = this.players.filter((player: string) => player !== target);
+    console.log(this.players);
+  }
 }

@@ -1,8 +1,10 @@
-<p>player-container works!</p>
 <div class="player-container">
   <div *ngFor="let player of players">
     <div class="row">
-      <span class="ml-2">{{ player }}</span>
+      <div class="player-card col-4">
+        <span class="ml-2">{{ player }}</span>
+        <button class="btn-danger col-3" (click)="onButtonClicked(player)">{{'eliminar' | titlecase}}</button>
+      </div>
     </div>    
   </div>
 </div>

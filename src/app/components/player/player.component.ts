@@ -21,6 +21,5 @@ export class PlayerComponent implements OnInit {
   onButtonClicked(): void {
     this.players.push(this.playerName);
     this.playerName = '';
-    console.log(this.players)
   }
 }
