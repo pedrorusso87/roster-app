@@ -13,7 +13,8 @@ export class PlayerContainerComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.playersLimit) {
-      this.clearPlayers();
+      /*TODO: Review this functionallity. Currently is bugging the hell out of the app.
+      this.clearPlayers();*/
     }
   }
 
