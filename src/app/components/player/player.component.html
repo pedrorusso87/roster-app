@@ -1,18 +1,25 @@
 <br>
 <div class="row">
-  <div class="col-4">   
+  <div class="col-3">   
     <div class="card">
       <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
-      <input type="text" (keyup)="onKeyUp($event.target)" [value]="playerName">
-      <button [ngClass]="playerName === '' ? 'button' : 'btn-success'" (click)="onButtonClicked()" [disabled]="playerName===''">{{'añadir' | titlecase}}</button>
+      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName">
+      <button [ngClass]="playerName === '' ? 'button' : 'btn-success'" (click)="onAddClicked()" [disabled]="playerName===''">{{'añadir' | titlecase}}</button>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <span class="card-title mr-2 mt-2">{{ 'cantidad de humanos' | titlecase }}</span>
+      <input numeric type="text" (keyup)="updatePlayersLimit($event.target)">
+      <button class ="btn btn-primary" (click)="onLimitClicked()">{{'actualizar' | titlecase}}</button>
     </div>
   </div>
 </div>
 <hr>
 <div *ngIf="players.length > 0">
   <app-player-container class="player-list"
-  [players]="players">
-
+    [players]="players"
+    [playersLimit]="playersLimit">
   </app-player-container>
 
 </div>

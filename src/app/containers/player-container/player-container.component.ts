@@ -7,14 +7,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PlayerContainerComponent implements OnInit {
 @Input() players: any;
+@Input() playersLimit: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    if (!this.playersLimit) {
+      this.clearPlayers();
+    }
   }
 
   onButtonClicked(target: any): void {
     this.players = this.players.filter((player: string) => player !== target);
-    console.log(this.players);
+  }
+
+  clearPlayers(): void {
+    this.players = [];
   }
 }

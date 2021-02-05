@@ -1,9 +1,21 @@
-<div class="player-container">
+<div *ngIf="playersLimit > 0 && players.length >= playersLimit" class="alert alert-danger text-center font-weight-bold" role="alert">
+  {{'limite de humanos alcanzado' | uppercase}}
+</div>
+<div *ngIf="playersLimit > 0">
+  <span class="card-title ml-2 mr-2 mt-2 font-weight-bold">{{ 'limite de jugadores:'  | uppercase }}</span>
+  <span class="card-title mr-2 mt-2">{{ playersLimit }}</span>
+  <span class="card-title ml-2 mr-2 mt-2 font-weight-bold">{{ 'anotados:'  | uppercase }}</span>
+  <span class="card-title mr-2 mt-2">{{ players.length }}</span>
+</div>
+<div *ngIf="!playersLimit" class="alert alert-danger text-center font-weight-bold">
+  {{'ingrese primero la cantidad de humanos que van a jugar. Primera advertencia' | uppercase}}
+</div>
+<div *ngIf="playersLimit > 0" class="player-container">
   <div *ngFor="let player of players">
     <div class="row">
-      <div class="player-card col-4">
+      <div class="player-card col-3">
         <span class="ml-2">{{ player }}</span>
-        <button class="btn-danger col-3" (click)="onButtonClicked(player)">{{'eliminar' | titlecase}}</button>
+        <button class="btn-danger col-2" (click)="onButtonClicked(player)">{{'eliminar' | titlecase}}</button>
       </div>
     </div>    
   </div>

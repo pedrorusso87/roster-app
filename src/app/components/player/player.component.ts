@@ -8,18 +8,28 @@ import { Component, OnInit } from '@angular/core';
 export class PlayerComponent implements OnInit {
 
   playerName = '';
+  playersLimit: any;
+  limit = 0;
   players: string[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onKeyUp(target: any): void {
+  onNameChanged(target: any): void {
     this.playerName = target.value;
   }
 
-  onButtonClicked(): void {
+  onAddClicked(): void {
     this.players.push(this.playerName);
     this.playerName = '';
+  }
+
+  updatePlayersLimit(target: any): void {
+    this.limit = parseInt(target.value, 10);
+  }
+
+  onLimitClicked(): void {
+    this.playersLimit = this.limit;
   }
 }
