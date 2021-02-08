@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Roster App</a>
+  <a class="navbar-brand" [routerLink]="['']">Roster App</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,10 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/humanos">{{ 'Añadir humanos'  | titlecase }} <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/humanos']">{{ 'Añadir humanos'  | titlecase }} <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/equipos">{{ 'armar equipos'  | titlecase }}</a>
+        <a class="nav-link" [routerLink]="['/equipos']">{{ 'armar equipos'  | titlecase }}</a>
       </li>
     </ul>             
     <ul class="navbar-nav justify-content-end">
