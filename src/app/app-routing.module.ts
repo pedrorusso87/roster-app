@@ -7,6 +7,12 @@ import { TeamsContainerComponent } from './containers/teams-container/teams-cont
 const routes: Routes = [
 
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+
+  },
+  {
     path: 'home',
     component: HomeComponent
 
@@ -18,7 +24,11 @@ const routes: Routes = [
   {
     path: 'equipos',
     component: TeamsContainerComponent
-  }
+  },
+
+  { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
+
+  { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) }
 ];
 
 @NgModule({

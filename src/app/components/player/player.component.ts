@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-player',
@@ -11,7 +13,9 @@ export class PlayerComponent implements OnInit {
   playersLimit: any;
   limit = 0;
   players: string[] = [];
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +26,10 @@ export class PlayerComponent implements OnInit {
 
   onAddClicked(): void {
     this.players.push(this.playerName);
+    /*const user = {
+      username: this.playerName
+    } as User;
+    this.userService.addUserToFireBase(user);*/
     this.playerName = '';
   }
 
