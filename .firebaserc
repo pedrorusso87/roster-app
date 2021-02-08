@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "auth-roster": {
+      "hosting": {
+        "roster-app": [
+          "auth-roster"
+        ]
+      }
+    }
+  }
+}
