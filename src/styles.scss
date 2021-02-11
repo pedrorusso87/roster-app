@@ -36,3 +36,22 @@
   .card.card.highlight-card span {
     margin-left: 60px;
   }
+
+  .session-form-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-items: center;
+  }
+  
+  .session-form {
+    padding: 9%;
+    background:#282726;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+  }
+  
+  .session-form h3 {
+    text-align: center;
+    margin-bottom:12%;
+    color:#fff;
+  }

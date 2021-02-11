@@ -7,13 +7,13 @@ import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './components/home/home.component';
 import { ContainerModule } from './containers/container.module';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './services/user/user.service';
 import { LoginModule } from './auth/login/login.module';
 import { RegisterModule } from './auth/register/register.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     LoginModule,
     RegisterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireAuthModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

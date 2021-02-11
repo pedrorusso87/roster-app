@@ -1,1 +1,18 @@
-<p>register works!</p>
+<div class="container session-form-container">
+  <div class="row">
+    <div class="col-md-6 session-form">
+      <h3 class="session-form-title">{{ 'register' | titlecase}}</h3>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Your Email *" value="" formControlName="email"/>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Your Password *" value="" formControlName="password"/>
+        </div>
+        <div class="form-group">
+          <button type="submit "class="btn btn-success btn-lg btn-block"> {{'register' | titlecase }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
