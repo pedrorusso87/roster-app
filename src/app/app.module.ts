@@ -14,6 +14,10 @@ import { LoginModule } from './auth/login/login.module';
 import { RegisterModule } from './auth/register/register.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { environment } from 'src/environments/environment';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,12 @@ import { environment } from 'src/environments/environment';
     LoginModule,
     RegisterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 20
+    })
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

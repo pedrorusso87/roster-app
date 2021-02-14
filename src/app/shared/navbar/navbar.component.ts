@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromRegister from '../../auth/register/store';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  registeredUser$ = this.store.select(fromRegister.getRegisteredUser);
+
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
   }

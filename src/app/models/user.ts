@@ -4,3 +4,8 @@ export interface User {
   lastName?: string;
   $key?: string;
 }
+
+export interface UserRegistration {
+  email: string;
+  password: string;
+}

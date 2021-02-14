@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
+import { UserRegistration } from 'src/app/models/user';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,21 +36,13 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    try {
-      return await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-
-    } catch (error) {
-      return error;
-    }
+  register(user: UserRegistration): Observable<any> {
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password))
+    .pipe(map(response => JSON.stringify(response)));
   }
 
   getCurrentUser(): Promise<any> {
     return this.afAuth.authState.pipe(first()).toPromise();
-  }
-
-  getAccountInfo() {
-    this
   }
 }
 

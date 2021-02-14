@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/models/user';
 
 @Injectable()
 export class UserService {
