@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -17,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
     RegisterRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     StoreModule.forFeature('registeredUser', reducers),
     EffectsModule.forFeature(effects)
   ],

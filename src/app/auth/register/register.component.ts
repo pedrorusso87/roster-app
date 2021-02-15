@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { combineLatest } from 'rxjs';
 import * as fromRegister from '../register/store';
 @Component({
   selector: 'app-register',
@@ -9,13 +12,17 @@ import * as fromRegister from '../register/store';
 })
 export class RegisterComponent implements OnInit {
   registeredUser$ = this.store.select(fromRegister.getRegisteredUser);
+  registeredUserPending$ = this.store.select(fromRegister.getRegisteredUserPending);
+
   registerForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
   user: any;
   constructor(
-    private store: Store<fromRegister.RegisterState>
+    private store: Store<fromRegister.RegisterState>,
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +33,18 @@ export class RegisterComponent implements OnInit {
       email: this.getEmail(),
       password: this.getPassword()
     }));
+    this.spinner.show();
+    this.listenForRegister();
+  }
+
+  listenForRegister(): void {
+    combineLatest([this.registeredUserPending$, this.registeredUser$]).subscribe(
+      ([pending, user]) => {
+        if (!pending && user) {
+          this.spinner.hide();
+          this.router.navigateByUrl('/humanos');
+        }
+      });
   }
 
   getEmail(): any {
