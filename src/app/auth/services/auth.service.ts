@@ -14,17 +14,15 @@ export class AuthService {
     public afAuth: AngularFireAuth,
   ) {}
 
-  async login(email: string, password: string): Promise<any> {
+  async login(user: UserRegistration): Promise<any> {
     try {
-       this.afAuth.auth.signInWithEmailAndPassword(email, password).then((newUser) => {
-        this.user = newUser;
+       this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((newUser) => {
+        return newUser;
       });
 
     } catch (error) {
       return error;
     }
-
-    return this.user;
    }
 
   async logOut(): Promise<void> {

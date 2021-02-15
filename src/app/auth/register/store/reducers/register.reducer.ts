@@ -17,7 +17,6 @@ export function reducer(state = initialState, action: fromRegister.RegisterActio
       };
     }
     case fromRegister.REGISTER_USER_SUCCESS: {
-      console.log(action)
       return {
         ...state,
         registerPending: false

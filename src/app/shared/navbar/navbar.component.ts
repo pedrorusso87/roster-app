@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRegister from '../../auth/register/store';
+import * as fromLogin from '../../auth/login/store';
+import { combineLatest, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,20 +12,26 @@ import * as fromRegister from '../../auth/register/store';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   registeredUser$ = this.store.select(fromRegister.getRegisteredUser);
+  loggedUser$ = this.store.select(fromLogin.getCurrentUser);
+  private unsubscribe$ = new Subject<void>();
+
+  showOptions = false;
   registeredUser: any;
   constructor(
     private store: Store
   ) { }
 
   ngOnInit(): void {
-    this.registeredUser$.subscribe((registeredUser) => {
-      this.registeredUser = registeredUser;
-      console.log(this.registeredUser);
+    combineLatest([this.registeredUser$, this.loggedUser$]).subscribe(([registeredUser, loggedUser]) => {
+      if (registeredUser || loggedUser) {
+        this.showOptions = true;
+      }
     });
   }
 
   ngOnDestroy(): void {
-
+  this.unsubscribe$.next();
+  this.unsubscribe$.complete();
   }
 
 }

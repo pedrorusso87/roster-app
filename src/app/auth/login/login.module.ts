@@ -5,7 +5,9 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { reducers, effects } from './store';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,7 +15,9 @@ import { AuthService } from '../services/auth.service';
     CommonModule,
     LoginRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('loggedUser', reducers),
+    EffectsModule.forFeature(effects)
   ],
   exports: [LoginComponent],
   providers: [
