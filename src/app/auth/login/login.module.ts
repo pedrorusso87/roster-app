@@ -6,18 +6,14 @@ import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
-import { reducers, effects } from './store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('loggedUser', reducers),
-    EffectsModule.forFeature(effects)
+    ReactiveFormsModule
   ],
   exports: [LoginComponent],
   providers: [

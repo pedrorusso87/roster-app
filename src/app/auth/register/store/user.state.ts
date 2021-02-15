@@ -1,12 +1,5 @@
-import { UserInformation } from "src/app/models/user";
-
 export interface RegisteredUserState {
-  user?: any;
-  currentUser?: UserInformation;
-  pending: {
-    registerPending?: boolean;
-    loginPending?: boolean;
-    currentUserPending?: boolean;
-  };
+  user: any;
+  registerPending: boolean;
   error: any;
 }
