@@ -2,9 +2,7 @@ import * as fromRegister from '../register-actions';
 import { RegisteredUserState } from '../user.state';
 
 export const initialState: RegisteredUserState = {
-  user: [{
-    username: 'pepe'
-  }],
+  user: null,
   registerPending: false,
   error: null
 };
