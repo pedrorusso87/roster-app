@@ -2,10 +2,8 @@ import * as fromRegister from '../register-actions';
 import { RegisteredUserState } from '../user.state';
 
 export const initialState: RegisteredUserState = {
-  user: [{
-    username: 'pepe'
-  }],
-  registerPending: false,
+  user: null,
+  pending: { registerPending: false },
   error: null
 };
 
@@ -14,21 +12,20 @@ export function reducer(state = initialState, action: fromRegister.RegisterActio
     case fromRegister.REGISTER_USER: {
       return {
         ...state,
-        registerPending: true,
+        pending: { ...state.pending, registerPending: true },
         user: action.payload
       };
     }
     case fromRegister.REGISTER_USER_SUCCESS: {
-      console.log(action)
       return {
         ...state,
-        registerPending: false
+        pending: { ...state.pending, registerPending: true },
       };
     }
     case fromRegister.REGISTER_USER_FAIL: {
       return {
         ...state,
-        registerPending: false,
+        pending: { ...state.pending, registerPending: true },
         error: action.payload
       };
     }
@@ -38,5 +35,5 @@ export function reducer(state = initialState, action: fromRegister.RegisterActio
   }
 }
 
-export const getRegisterUserPending = (state: RegisteredUserState) => state.registerPending;
+export const getRegisterUserPending = (state: RegisteredUserState) => state.pending.registerPending;
 export const getRegisteredUser = (state: RegisteredUserState) => state.user;

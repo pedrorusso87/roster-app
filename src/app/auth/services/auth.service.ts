@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { first, map } from 'rxjs/operators';
 import { UserRegistration } from 'src/app/models/user';
 import { from, Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,9 +13,9 @@ export class AuthService {
     public afAuth: AngularFireAuth,
   ) {}
 
-  async login(email: string, password: string): Promise<any> {
+  async login(user: UserRegistration): Promise<any> {
     try {
-       this.afAuth.auth.signInWithEmailAndPassword(email, password).then((newUser) => {
+       this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((newUser) => {
         this.user = newUser;
       });
 

@@ -5,6 +5,13 @@ export interface User {
   $key?: string;
 }
 
+export interface UserInformation {
+  displayName: string;
+  email: string;
+  emailVerified: boolean;
+  
+}
+
 export interface UserRegistration {
   email: string;
   password: string;

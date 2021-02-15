@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserRegistration } from 'src/app/models/user';
 import { AuthService } from '../services/auth.service';
+import * as fromLogin from '../../auth/login/store';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,14 +16,19 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<fromLogin.LoginState>
   ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.authService.login(this.getEmail(), this.getPassword());
+    const user = {
+      email: this.getEmail(),
+      password: this.getPassword()
+    } as UserRegistration;
+    this.store.dispatch(new fromLogin.LoginUser(user));
   }
 
   getEmail(): any {

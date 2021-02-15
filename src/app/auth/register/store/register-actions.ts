@@ -5,15 +5,10 @@ import { UserRegistration } from 'src/app/models/user';
 export const REGISTER_USER = '[AUTH] Register user';
 export const REGISTER_USER_SUCCESS = '[AUTH] Register user success';
 export const REGISTER_USER_FAIL = '[AUTH] Register user failed';
-
-// get current user
-export const GET_USER = '[AUTH] get current user';
-
 export class RegisterUser implements Action {
   readonly type = REGISTER_USER;
   constructor( public payload: UserRegistration) {}
 }
-
 export class RegisterUserSuccess implements Action {
   readonly type = REGISTER_USER_SUCCESS;
 }

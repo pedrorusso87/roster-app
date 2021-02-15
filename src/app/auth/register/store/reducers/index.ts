@@ -24,5 +24,5 @@ export const getRegisteredUser = createSelector(
 );
 export const getRegisteredUserPending = createSelector(
   getRegisteredUserState,
-  (state: RegisteredUserState) => state.registerPending
+  (state: RegisteredUserState) => state.pending.registerPending
 );
