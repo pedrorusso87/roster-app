@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import { Effect, Actions, ofType, createEffect } from '@ngrx/effects';
 import { from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
@@ -13,9 +13,7 @@ export default class RegisterEffects {
     private authService: AuthService
   ) {}
 
-  // tslint:disable-next-line: deprecation
-  @Effect()
-  userRegistration$ = this.actions$.pipe(
+  userRegistration$ = createEffect(() => this.actions$.pipe(
     ofType(registerActions.REGISTER_USER),
     switchMap((data: any) => {
       return this.authService.register(data.payload).pipe(
@@ -23,5 +21,5 @@ export default class RegisterEffects {
         catchError(error => of(new registerActions.RegisterUserFailed(error)))
       );
     })
-  );
+  ));
 }

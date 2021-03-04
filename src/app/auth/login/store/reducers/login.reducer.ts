@@ -24,7 +24,8 @@ export function reducer(state = initialState, action: fromLogin.LoginUserActions
       return {
         ...state,
         pending: {...state.pending, loginPending: false},
-        user: action.payload
+        user: action.payload,
+        error: null
       };
     }
     case fromLogin.LOGIN_USER_FAIL: {

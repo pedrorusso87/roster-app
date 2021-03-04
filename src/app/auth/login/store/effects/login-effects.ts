@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import { Effect, Actions, ofType, createEffect } from '@ngrx/effects';
+import { analytics } from 'firebase';
 import { from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -13,20 +14,24 @@ export default class LoginEffects {
     private authService: AuthService
   ) {}
 
-  // tslint:disable-next-line: deprecation
-  @Effect()
-  loginUser$ = this.actions$.pipe(
+  loginUser$ = createEffect(() => this.actions$.pipe(
     ofType(loginUserActions.LOGIN_USER),
     switchMap((data: any) => {
       return from(this.authService.login(data.payload)).pipe(
-        map((user) => new loginUserActions.LoginUserSuccess(user)),
+        map((response) => {
+          // TODO -> Check this behaviour, see how can we fix this !response thingy
+          if (!response) {
+            return new loginUserActions.LoginUserSuccess(response);
+          } else {
+            return new loginUserActions.LoginUserFailed(response);
+          }
+        }),
         catchError(error => of(new loginUserActions.LoginUserFailed(error)))
       );
     })
-  );
+  ));
 
-  @Effect()
-  loginUserSuccess$ = this.actions$.pipe(
+  loginUserSuccess$ = createEffect(() =>  this.actions$.pipe(
     ofType(loginUserActions.LOGIN_USER_SUCCESS),
     switchMap(() => {
       return of(
@@ -35,10 +40,9 @@ export default class LoginEffects {
         }
       );
     })
-  );
+  ));
 
-  @Effect()
-  getCurrentUser$ = this.actions$.pipe(
+  getCurrentUser$ = createEffect(() => this.actions$.pipe(
     ofType(loginUserActions.GET_CURRENT_USER),
     switchMap(() => {
       return from(this.authService.getCurrentUser()).pipe(
@@ -53,5 +57,5 @@ export default class LoginEffects {
         catchError(error => of(new loginUserActions.GetCurrentUserFailed(error)))
       );
     })
-  );
+  ));
 }

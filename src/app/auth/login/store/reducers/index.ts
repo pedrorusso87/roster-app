@@ -17,5 +17,6 @@ export const getLoggedUserState = createSelector(loggedUserState, (state: Logged
 
 export const getLoggedUser = createSelector(getLoggedUserState, fromLoginUser.getLoggedUser);
 export const getLoggedUserPending = createSelector(getLoggedUserState, (state: LoggedUserState) => state.pending.loginPending);
+export const getLoggedUserError = createSelector(getLoggedUserState, (state: LoggedUserState) => state.error);
 export const getCurrentUser = createSelector(getLoggedUserState, fromLoginUser.getCurrentUser);
 export const getCurrentUserPending = createSelector(getLoggedUserState, fromLoginUser.getCurrentUserPending);

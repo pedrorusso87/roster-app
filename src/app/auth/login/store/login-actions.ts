@@ -3,7 +3,7 @@ import { UserRegistration } from 'src/app/models/user';
 
 export const LOGIN_USER = '[AUTH] login user';
 export const LOGIN_USER_SUCCESS = '[AUTH] login user success';
-export const LOGIN_USER_FAIL = '[AUTH] logint user failed';
+export const LOGIN_USER_FAIL = '[AUTH] login user failed';
 
 export const GET_CURRENT_USER = '[AUTH] get current user';
 export const GET_CURRENT_USER_SUCCESS = '[AUTH] get current user success';

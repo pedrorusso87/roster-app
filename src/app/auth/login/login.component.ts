@@ -13,6 +13,7 @@ import * as fromLogin from '../login/store';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
+  loginUserError$ = this.store.select(fromLogin.getLoggedUserError);
   currentUserPending$ = this.store.select(fromLogin.getCurrentUserPending);
   private unsubscribe$ = new Subject<void>();
 
@@ -35,18 +36,24 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: this.getEmail(),
       password: this.getPassword()
     } as UserRegistration;
-    this.store.dispatch(new fromLogin.LoginUser(user));
     this.spinner.show();
+    this.store.dispatch(new fromLogin.LoginUser(user));
     this.listenForLogin();
   }
 
   listenForLogin(): void {
-    combineLatest([this.loginUserPending$, this.currentUserPending$]).subscribe(([loginPending, currentUserPending]) => {
+    combineLatest([this.loginUserPending$, this.currentUserPending$])
+    .subscribe(([loginPending, currentUserPending]) => {
       if (!loginPending && !currentUserPending) {
-        this.spinner.hide();
-        this.router.navigateByUrl('/humanos');
+        this.loginUserError$.pipe().subscribe(error => {
+          if (!error) {
+            this.spinner.hide();
+            this.router.navigateByUrl('/humanos');
+
+          }
+        });
       }
-    })
+    });
   }
 
   getEmail(): any {
