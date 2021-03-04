@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,29 +16,42 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginUserError$ = this.store.select(fromLogin.getLoggedUserError);
   currentUserPending$ = this.store.select(fromLogin.getCurrentUserPending);
   private unsubscribe$ = new Subject<void>();
-
-  loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  });
+  errors = false;
+  errorMessage = null;
+  loginForm: FormGroup;
 
   constructor(
     private store: Store,
     private spinner: NgxSpinnerService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private fb: FormBuilder
+    ) {
+      this.loginForm = this.fb.group({
+        email: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required)
+      });
+    }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    const user = {
-      email: this.getEmail(),
-      password: this.getPassword()
-    } as UserRegistration;
-    this.spinner.show();
-    this.store.dispatch(new fromLogin.LoginUser(user));
-    this.listenForLogin();
+    this.validateForm();
+  }
+
+  validateForm(): void {
+    if (this.loginForm.valid) {
+      this.errors = false;
+      this.spinner.show();
+      const user = {
+        email: this.getEmail(),
+        password: this.getPassword()
+      } as UserRegistration;
+      this.store.dispatch(new fromLogin.LoginUser(user));
+      this.listenForLogin();
+    } else {
+      this.errors = true;
+    }
   }
 
   listenForLogin(): void {
@@ -49,7 +62,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (!error) {
             this.spinner.hide();
             this.router.navigateByUrl('/humanos');
-
+          } else {
+            this.spinner.hide();
+            this.errorMessage = error.message;
           }
         });
       }
@@ -62,6 +77,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   getPassword(): any {
     return this.loginForm.get('password')?.value;
+  }
+
+  close(): void {
+    this.errorMessage = null;
   }
 
   ngOnDestroy(): void {

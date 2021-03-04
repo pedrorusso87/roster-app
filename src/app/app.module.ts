@@ -21,6 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 20
-    })
+    }),
+    NgbModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

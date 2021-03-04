@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,8 +18,10 @@ import { reducers, effects } from './store';
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     StoreModule.forFeature('loggedUser', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    NgbAlertModule
   ],
   exports: [LoginComponent],
   providers: [

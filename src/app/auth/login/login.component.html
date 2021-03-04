@@ -1,13 +1,32 @@
 <div class="container session-form-container">
+  <div *ngIf="errorMessage" class="row">
+    <div class="col-md-6">
+      <ngb-alert  [type]="'danger'" (closed)="close()">{{ errorMessage }}</ngb-alert>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6 session-form">
       <h3 class="session-form-title text-center">{{ 'login' | titlecase}}</h3>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <input type="email" class="form-control" placeholder="Your Email *" value="" formControlName="email"/>
+          <input [ngClass]="errors && loginForm.controls['email'].errors ? 'form-control error-field' : 'form-control'" 
+            type="email" 
+            placeholder="Your Email *" 
+            value="" 
+            formControlName="email"/>
+          <span class="error-message" *ngIf="errors && loginForm.controls['email'].errors?.required">
+            * Email is required.
+          </span>
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Your Password *" value="" formControlName="password"/>
+          <input [ngClass]="errors && loginForm.controls['password'].errors ? 'form-control error-field' : 'form-control'" 
+            type="password" 
+            placeholder="Your Password *"
+            value=""
+            formControlName="password"/>
+          <span class="error-message" *ngIf="errors && loginForm.controls['password'].errors?.required">
+            * Password is required.
+          </span>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-lg btn-block"> {{'login' | titlecase }}</button>
@@ -21,4 +40,5 @@
       </form>
     </div>
   </div>
+  <ngx-spinner type="ball-clip-rotate-multiple"></ngx-spinner>
 </div>
