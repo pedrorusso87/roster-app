@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PlayerComponent } from './components/player/player.component';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { TeamsContainerComponent } from './containers/teams-container/teams-container.component';
 
 const routes: Routes = [
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'equipos',
     component: TeamsContainerComponent
+  },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent
   },
 
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },

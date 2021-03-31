@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginUserError$.pipe().subscribe(error => {
           if (!error) {
             this.spinner.hide();
-            this.router.navigateByUrl('/humanos');
+            this.router.navigateByUrl('/dashboard');
           } else {
             this.spinner.hide();
             this.errorMessage = error.message;
