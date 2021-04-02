@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType, createEffect } from '@ngrx/effects';
-import { analytics } from 'firebase';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 import * as loginUserActions from '../login-actions';
-
 @Injectable()
 export default class LoginEffects {
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store,
   ) {}
 
   loginUser$ = createEffect(() => this.actions$.pipe(
@@ -19,12 +19,7 @@ export default class LoginEffects {
     switchMap((data: any) => {
       return from(this.authService.login(data.payload)).pipe(
         map((response) => {
-          // TODO -> Check this behaviour, see how can we fix this !response thingy
-          if (!response) {
-            return new loginUserActions.LoginUserSuccess(response);
-          } else {
-            return new loginUserActions.LoginUserFailed(response);
-          }
+          return new loginUserActions.LoginUserSuccess(response);
         }),
         catchError(error => of(new loginUserActions.LoginUserFailed(error)))
       );

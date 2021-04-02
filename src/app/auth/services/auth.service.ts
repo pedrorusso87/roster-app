@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { first, map } from 'rxjs/operators';
 import { UserRegistration } from 'src/app/models/user';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as loginUserActions from '../../auth/login/store/login-actions';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,14 @@ export class AuthService {
 
   constructor(
     public afAuth: AngularFireAuth,
+    private store: Store
   ) {}
 
-  async login(user: UserRegistration): Promise<any> {
-    try {
-      await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((newUser) => {
-        return newUser;
-      });
-    } catch (error) { return error; }
+  login(user: UserRegistration): Promise<any>{
+    const response = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(response => {
+      console.log(response)
+      return of(response)});
+    return response;
    }
 
   async logOut(): Promise<void> {
