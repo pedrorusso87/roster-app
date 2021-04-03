@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'humanos',
     component: PlayerComponent,
-    canActivate: [LoginGuard]
+    //canActivate: [LoginGuard]
   },
   {
     path: 'equipos',

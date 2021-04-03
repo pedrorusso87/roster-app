@@ -18,7 +18,6 @@ export class AuthService {
 
   login(user: UserRegistration): Promise<any>{
     const response = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(response => {
-      console.log(response)
       return of(response)});
     return response;
    }

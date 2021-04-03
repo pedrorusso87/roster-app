@@ -14,9 +14,9 @@
   <div *ngFor="let player of players">
     <div class="row">
       <div class="player-card col-3">
-        <span class="ml-2">{{ player }}</span>
+        <span class="ml-2">{{ player.name }}</span>
         <button class="btn-danger col-2" (click)="onButtonClicked(player)">{{'eliminar' | titlecase}}</button>
       </div>
-    </div>    
+    </div>
   </div>
 </div>

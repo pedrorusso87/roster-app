@@ -23,7 +23,6 @@ export class LoginGuard implements CanActivate {
           canActivate = false;
         }
       })
-      console.log(canActivate);
       return canActivate;
   }
 

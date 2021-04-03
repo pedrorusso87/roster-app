@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user/user.service';
+import { Store } from '@ngrx/store';
+import * as fromPlayersListActions from './store/player-actions'
+import * as fromPlayers from './store'
+import * as fromAuth from '../../auth/login/store'
 
 @Component({
   selector: 'app-player',
@@ -11,10 +13,14 @@ export class PlayerComponent implements OnInit {
 
   playerName = '';
   playersLimit: any;
+  completed = false;
+  completedMessage = 'Convocatoria completa!'
   limit = 0;
-  players: string[] = [];
+  players: any;
+  players$ = this.store.select(fromPlayers.getPlayersList)
+  user$ = this.store.select(fromAuth.getCurrentUser)
   constructor(
-    private userService: UserService
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -25,13 +31,29 @@ export class PlayerComponent implements OnInit {
   }
 
   onAddClicked(): void {
-    this.players.push(this.playerName);
-    /*const user = {
-      username: this.playerName
-    } as User;
-    this.userService.addUserToFireBase(user);*/
-    this.playerName = '';
+    if (!this.rosterCompleted()) {
+      this.store.dispatch(new fromPlayersListActions.UpdatePlayersList({
+        completed: false,
+        players: {
+          id: 1,
+          name: this.playerName,
+          email: 'testmail'
+        }}
+      ))
+    }
   }
+
+  rosterCompleted(): boolean {
+    var completed = false
+    this.players$.subscribe(players => { if (players.length === this.playersLimit) {
+      this.completed = true;
+      } else {
+        this.completed = false;
+      }
+    })
+    return completed;
+  }
+
 
   updatePlayersLimit(target: any): void {
     this.limit = parseInt(target.value, 10);
@@ -39,5 +61,9 @@ export class PlayerComponent implements OnInit {
 
   onLimitClicked(): void {
     this.playersLimit = this.limit;
+  }
+
+  close(): void {
+
   }
 }

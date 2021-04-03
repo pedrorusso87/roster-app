@@ -29,11 +29,7 @@ export default class LoginEffects {
   loginUserSuccess$ = createEffect(() =>  this.actions$.pipe(
     ofType(loginUserActions.LOGIN_USER_SUCCESS),
     switchMap(() => {
-      return of(
-        {
-          type: loginUserActions.GET_CURRENT_USER
-        }
-      );
+      return of({ type: loginUserActions.GET_CURRENT_USER });
     })
   ));
 
@@ -43,6 +39,7 @@ export default class LoginEffects {
       return from(this.authService.getCurrentUser()).pipe(
         map((data) => {
           const user = {
+            id: data.uid,
             displayName: data.displayName,
             email: data.email,
             emailVerified: data.emailVerified

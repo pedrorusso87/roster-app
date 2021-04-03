@@ -1,11 +1,14 @@
 <br>
 <div class="row">
-  <div class="col-3">   
+  <div class="col-3">
     <div class="card">
       <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
       <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName">
       <button [ngClass]="playerName === '' ? 'button' : 'btn-success'" (click)="onAddClicked()" [disabled]="playerName===''">{{'añadir' | titlecase}}</button>
     </div>
+  </div>
+  <div class="col-3">
+    <ngb-alert *ngIf="completed" [type]="'danger'" (closed)="close()">{{ completedMessage }}</ngb-alert>
   </div>
   <div class="col-4">
     <div class="card">
@@ -16,9 +19,9 @@
   </div>
 </div>
 <hr>
-<div *ngIf="players.length > 0">
+<div *ngIf="(players$ | async)?.length ">
   <app-player-container class="player-list"
-    [players]="players"
+    [players]="players$ | async"
     [playersLimit]="playersLimit">
   </app-player-container>
 </div>
