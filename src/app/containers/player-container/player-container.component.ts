@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromPlayers from '../../components/player/store/player-actions';
 
 @Component({
   selector: 'app-player-container',
@@ -9,20 +11,16 @@ export class PlayerContainerComponent implements OnInit {
 @Input() players: any;
 @Input() playersLimit: any;
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) { }
 
-  ngOnInit(): void {
-    if (!this.playersLimit) {
-      /*TODO: Review this functionallity. Currently is bugging the hell out of the app.
-      this.clearPlayers();*/
-    }
-  }
+  ngOnInit(): void {}
 
-  onButtonClicked(target: any): void {
+  onDeletePlayerClicked(target: any): void {
     this.players = this.players.filter((player: string) => player !== target);
+    this.store.dispatch(new fromPlayers.DeletePlayer({ players: this.players.length > 0 ? this.players : [] }));
   }
 
-  clearPlayers(): void {
-    this.players = [];
-  }
+  close(): void { }
 }

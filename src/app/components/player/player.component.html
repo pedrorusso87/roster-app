@@ -1,20 +1,18 @@
 <br>
 <div class="row">
-  <div class="col-3">
-    <div class="card">
-      <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
-      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName">
-      <button [ngClass]="playerName === '' ? 'button' : 'btn-success'" (click)="onAddClicked()" [disabled]="playerName===''">{{'añadir' | titlecase}}</button>
-    </div>
-  </div>
-  <div class="col-3">
-    <ngb-alert *ngIf="completed" [type]="'danger'" (closed)="close()">{{ completedMessage }}</ngb-alert>
-  </div>
   <div class="col-4">
     <div class="card">
       <span class="card-title mr-2 mt-2">{{ 'cantidad de humanos' | titlecase }}</span>
       <input numeric type="text" (keyup)="updatePlayersLimit($event.target)">
-      <button class ="btn btn-primary" (click)="onLimitClicked()">{{'actualizar' | titlecase}}</button>
+      <button *ngIf="!playersLimit" class ="btn btn-success" (click)="onLimitClicked()">{{'aceptar' | titlecase}}</button>
+      <button *ngIf="playersLimit" class ="btn btn-primary" (click)="onLimitClicked()">{{'actualizar' | titlecase}}</button>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
+      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName" [disabled]="!playersLimit">
+      <button [ngClass]="playerName === '' ? 'btn button' : 'btn btn-success'" (click)="onAddClicked()" [disabled]="playerName==='' || completed">{{'añadir' | titlecase}}</button>
     </div>
   </div>
 </div>

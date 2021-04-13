@@ -39,19 +39,18 @@ export class PlayerComponent implements OnInit {
           name: this.playerName,
           email: 'testmail'
         }}
-      ))
+      ));
     }
   }
 
   rosterCompleted(): boolean {
-    var completed = false
     this.players$.subscribe(players => { if (players.length === this.playersLimit) {
       this.completed = true;
       } else {
         this.completed = false;
       }
-    })
-    return completed;
+    });
+    return this.completed;
   }
 
 
@@ -62,8 +61,6 @@ export class PlayerComponent implements OnInit {
   onLimitClicked(): void {
     this.playersLimit = this.limit;
   }
+  close(): void {}
 
-  close(): void {
-
-  }
 }

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  showModal = false;
   constructor(
     private router: Router
   ) { }
@@ -16,7 +17,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onNewMatchClicked() {
-    this.router.navigateByUrl('/humanos');
+    // this.router.navigateByUrl('/humanos');
+    this.showModal = !this.showModal;
   }
 
 }

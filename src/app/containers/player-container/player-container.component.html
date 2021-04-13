@@ -1,21 +1,24 @@
-<div *ngIf="playersLimit > 0 && players.length >= playersLimit" class="alert alert-danger text-center font-weight-bold" role="alert">
-  {{'limite de humanos alcanzado' | uppercase}}
-</div>
+<ngb-alert  class="alert alert-danger text-center font-weight-bold" *ngIf="playersLimit > 0 && players.length >= playersLimit"
+  [type]="'danger'"
+  (closed)="close()">
+    {{'limite de humanos alcanzado' | uppercase}}
+</ngb-alert>
 <div *ngIf="playersLimit > 0">
   <span class="card-title ml-2 mr-2 mt-2 font-weight-bold">{{ 'limite de jugadores:'  | uppercase }}</span>
   <span class="card-title mr-2 mt-2">{{ playersLimit }}</span>
   <span class="card-title ml-2 mr-2 mt-2 font-weight-bold">{{ 'anotados:'  | uppercase }}</span>
   <span class="card-title mr-2 mt-2">{{ players.length }}</span>
 </div>
-<div *ngIf="!playersLimit" class="alert alert-danger text-center font-weight-bold">
-  {{'ingrese primero la cantidad de humanos que van a jugar. Primera advertencia' | uppercase}}
-</div>
-<div *ngIf="playersLimit > 0" class="player-container">
+<div *ngIf="players.length > 0" class="player-container">
   <div *ngFor="let player of players">
-    <div class="row">
-      <div class="player-card col-3">
-        <span class="ml-2">{{ player.name }}</span>
-        <button class="btn-danger col-2" (click)="onButtonClicked(player)">{{'eliminar' | titlecase}}</button>
+    <div class="card">
+      <div class="card-body">
+        <div class="col-1">
+          <h5 class="card-title pt-2">{{ player.name }}</h5>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-danger delete-player" (click)="onDeletePlayerClicked(player)">{{'eliminar' | titlecase}}</button>
+        </div>
       </div>
     </div>
   </div>
