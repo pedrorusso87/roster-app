@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromPlayersListActions from './store/player-actions'
-import * as fromPlayers from './store'
-import * as fromAuth from '../../auth/login/store'
+import * as fromPlayersListActions from '../store/player-actions';
+import * as fromPlayers from '../store';
+import * as fromAuth from '../../../auth/login/store';
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  selector: 'app-add-player',
+  templateUrl: './add-player.component.html',
+  styleUrls: ['./add-player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class AddPlayerComponent implements OnInit {
 
   playerName = '';
   playersLimit: any;
   completed = false;
-  completedMessage = 'Convocatoria completa!'
+  completedMessage = 'Convocatoria completa!';
   limit = 0;
   players: any;
-  players$ = this.store.select(fromPlayers.getPlayersList)
-  user$ = this.store.select(fromAuth.getCurrentUser)
+  players$ = this.store.select(fromPlayers.getPlayersList);
+  user$ = this.store.select(fromAuth.getCurrentUser);
   constructor(
     private store: Store
   ) { }
@@ -40,6 +40,7 @@ export class PlayerComponent implements OnInit {
           email: 'testmail'
         }}
       ));
+      this.playerName = '';
     }
   }
 

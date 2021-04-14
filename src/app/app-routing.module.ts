@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { PlayerComponent } from './components/player/player.component';
+import { AddPlayerComponent } from './components/player/add-player/add-player.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { TeamsContainerComponent } from './containers/teams-container/teams-container.component';
 import { LoginGuard } from './guards/login.guard';
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'humanos',
-    component: PlayerComponent,
+    component: AddPlayerComponent,
     canActivate: [LoginGuard]
   },
   {

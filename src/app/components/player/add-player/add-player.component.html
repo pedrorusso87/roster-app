@@ -11,7 +11,7 @@
   <div class="col-3">
     <div class="card">
       <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
-      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName" [disabled]="!playersLimit">
+      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName" [disabled]="!playersLimit" ([ngModel])="playerName">
       <button [ngClass]="playerName === '' ? 'btn button' : 'btn btn-success'" (click)="onAddClicked()" [disabled]="playerName==='' || completed">{{'añadir' | titlecase}}</button>
     </div>
   </div>
