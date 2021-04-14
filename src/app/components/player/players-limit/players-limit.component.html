@@ -1,0 +1,13 @@
+
+<div class="card">
+  <div class="row">
+    <div class="col-6">
+      <input numeric type="text" [placeholder]="amount" (keyup)="updatePlayersLimit($event.target)">
+    </div>
+    <div class="col-3">
+      <button *ngIf="!playersLimit" class ="btn btn-success ml-4" (click)="onLimitClicked()">{{'aceptar' | titlecase}}</button>
+      <button *ngIf="playersLimit" class ="btn btn-primary ml-4" (click)="onLimitClicked()">{{'actualizar' | titlecase}}</button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-3">
+    <br>
+    <app-players-limit
+      (playerLimitChanged)="handlePlayerLimitChanged($event)">
+    </app-players-limit>
+  </div>
+  <div class="col-3">
+    <br>
+    <app-add-player
+      [playersLimit]="playersLimit">
+    </app-add-player>
+  </div>
+</div>
+<hr>
+<div *ngIf="(players$ | async)?.length ">
+  <app-player-container class="player-list"
+    [players]="players$ | async"
+    [playersLimit]="playersLimit">
+  </app-player-container>
+</div>

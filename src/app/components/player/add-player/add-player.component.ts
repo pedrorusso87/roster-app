@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromPlayersListActions from '../store/player-actions';
 import * as fromPlayers from '../store';
@@ -10,15 +10,14 @@ import * as fromAuth from '../../../auth/login/store';
   styleUrls: ['./add-player.component.scss']
 })
 export class AddPlayerComponent implements OnInit {
+@Input() playersLimit: any;
 
   playerName = '';
-  playersLimit: any;
+  name = 'Nombre';
   completed = false;
   completedMessage = 'Convocatoria completa!';
-  limit = 0;
   players: any;
   players$ = this.store.select(fromPlayers.getPlayersList);
-  user$ = this.store.select(fromAuth.getCurrentUser);
   constructor(
     private store: Store
   ) { }
@@ -45,6 +44,7 @@ export class AddPlayerComponent implements OnInit {
   }
 
   rosterCompleted(): boolean {
+    // tslint:disable-next-line: deprecation
     this.players$.subscribe(players => { if (players.length === this.playersLimit) {
       this.completed = true;
       } else {
@@ -54,14 +54,6 @@ export class AddPlayerComponent implements OnInit {
     return this.completed;
   }
 
-
-  updatePlayersLimit(target: any): void {
-    this.limit = parseInt(target.value, 10);
-  }
-
-  onLimitClicked(): void {
-    this.playersLimit = this.limit;
-  }
   close(): void {}
 
 }

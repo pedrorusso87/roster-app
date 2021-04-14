@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onNewMatchClicked() {
+  onNewMatchClicked(): void {
     // this.router.navigateByUrl('/humanos');
     this.showModal = !this.showModal;
   }

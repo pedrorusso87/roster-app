@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       ([pending, user]) => {
         if (!pending && user) {
           this.spinner.hide();
-          this.router.navigateByUrl('/humanos');
+          this.router.navigateByUrl('/create-match');
         }
       });
   }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromPlayers from '../../components/player/store/player-actions';
+import * as fromPlayersActions from '../../components/player/store/player-actions';
 
 @Component({
   selector: 'app-player-container',
@@ -19,7 +19,7 @@ export class PlayerContainerComponent implements OnInit {
 
   onDeletePlayerClicked(target: any): void {
     this.players = this.players.filter((player: string) => player !== target);
-    this.store.dispatch(new fromPlayers.DeletePlayer({ players: this.players.length > 0 ? this.players : [] }));
+    this.store.dispatch(new fromPlayersActions.DeletePlayer({ players: this.players.length > 0 ? this.players : [] }));
   }
 
   close(): void { }

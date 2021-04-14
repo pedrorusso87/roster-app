@@ -1,27 +1,17 @@
-<br>
-<div class="row">
-  <div class="col-4">
-    <div class="card">
-      <span class="card-title mr-2 mt-2">{{ 'cantidad de humanos' | titlecase }}</span>
-      <input numeric type="text" (keyup)="updatePlayersLimit($event.target)">
-      <button *ngIf="!playersLimit" class ="btn btn-success" (click)="onLimitClicked()">{{'aceptar' | titlecase}}</button>
-      <button *ngIf="playersLimit" class ="btn btn-primary" (click)="onLimitClicked()">{{'actualizar' | titlecase}}</button>
+<div class="card">
+  <div class="row">
+    <div class="col-6">
+      <input type="text" (keyup)="onNameChanged($event.target)" 
+      [value]="playerName" 
+      [disabled]="!playersLimit"
+      [placeholder]="name"
+      ([ngModel])="playerName">
     </div>
-  </div>
-  <div class="col-3">
-    <div class="card">
-      <span class="card-title mr-2 mt-2">{{ 'nombre'  | uppercase }}</span>
-      <input type="text" (keyup)="onNameChanged($event.target)" [value]="playerName" [disabled]="!playersLimit" ([ngModel])="playerName">
-      <button [ngClass]="playerName === '' ? 'btn button' : 'btn btn-success'" (click)="onAddClicked()" [disabled]="playerName==='' || completed">{{'añadir' | titlecase}}</button>
+    <div class="col-3">
+      <button [ngClass]="playerName === '' ? 'btn button ml-4' : 'btn btn-success ml-4'" 
+        (click)="onAddClicked()"
+        [disabled]="playerName==='' || completed">{{'añadir' | titlecase}}
+      </button>
     </div>
   </div>
 </div>
-<hr>
-<div *ngIf="(players$ | async)?.length ">
-  <app-player-container class="player-list"
-    [players]="players$ | async"
-    [playersLimit]="playersLimit">
-  </app-player-container>
-</div>
-
-

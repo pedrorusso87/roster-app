@@ -4,12 +4,13 @@ import { PlayerContainerComponent } from './player-container/player-container.co
 import { TeamsContainerComponent } from './teams-container/teams-container.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-
-
-
+import { CreateMatchContainerComponent } from './create-match-container/create-match-container.component';
+import { ComponentsModule } from '../components/components.module';
 @NgModule({
-  declarations: [PlayerContainerComponent, TeamsContainerComponent, DashboardComponent],
+  declarations: [PlayerContainerComponent, TeamsContainerComponent,
+    DashboardComponent, CreateMatchContainerComponent, ],
   imports: [
+    ComponentsModule,
     CommonModule,
     NgbAlertModule
   ],
