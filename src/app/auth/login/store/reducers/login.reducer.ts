@@ -16,14 +16,14 @@ export function reducer(state = initialState, action: fromLogin.LoginUserActions
     case fromLogin.LOGIN_USER: {
       return {
         ...state,
-        pending: {...state.pending, loginPending: true},
+        pending: {...state.pending, loginPending: true, currentUserPending: true},
         user: action.payload
       };
     }
     case fromLogin.LOGIN_USER_SUCCESS: {
       return {
         ...state,
-        pending: {...state.pending, loginPending: false},
+        pending: {...state.pending, loginPending: false, currentUserPending: true},
         user: action.payload,
         error: null
       };
@@ -31,7 +31,7 @@ export function reducer(state = initialState, action: fromLogin.LoginUserActions
     case fromLogin.LOGIN_USER_FAIL: {
       return {
         ...state,
-        pending: {...state.pending, loginPending: false},
+        pending: {...state.pending, loginPending: false, currentUserPending: false},
         error: action.payload
       };
     }

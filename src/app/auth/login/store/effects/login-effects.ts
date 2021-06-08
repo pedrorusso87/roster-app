@@ -42,7 +42,7 @@ export default class LoginEffects {
             id: data.uid,
             displayName: data.displayName,
             email: data.email,
-            emailVerified: data.emailVerified
+            emailVerified: data.emailVerified,
           };
           return new loginUserActions.GetCurrentUserSuccess(user);
         }),

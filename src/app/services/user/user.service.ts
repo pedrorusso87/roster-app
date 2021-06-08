@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from 'src/app/models/user';
 
 @Injectable()
 export class UserService {
 
-  private userList: AngularFireList<any>;
+  private userList: any;
+  private user: any;
 
   constructor(
     private firebase: AngularFireDatabase
   ) {
-    this.userList = this.firebase.list('users');
+    this.user = this.firebase.list('users');
   }
-
-  getUsersFromFirebase(): AngularFireList<any> {
+  
+  getUsersFromFirebase(): any {
+    this.userList = this.firebase.list('users').valueChanges();
     return this.userList;
   }
 
   addUserToFireBase(user: User): void {
-    this.userList.push(user);
+    this.user.push(user);
   }
 }

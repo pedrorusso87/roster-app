@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { AddPlayerComponent } from './components/player/add-player/add-player.component';
 import { CreateMatchContainerComponent } from './containers/create-match-container/create-match-container.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { TeamsContainerComponent } from './containers/teams-container/teams-container.component';
@@ -24,7 +23,7 @@ const routes: Routes = [
   {
     path: 'create-match',
     component: CreateMatchContainerComponent,
-    // canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'equipos',
@@ -35,7 +34,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   },
 
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },

@@ -22,6 +22,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatchesService } from './services/matches/matches.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     }),
     NgbModule
   ],
-  providers: [UserService],
+  providers: [UserService, MatchesService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

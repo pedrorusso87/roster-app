@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { combineLatest, from, Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { UserRegistration } from 'src/app/models/user';
 import * as fromLogin from '../login/store';
 @Component({

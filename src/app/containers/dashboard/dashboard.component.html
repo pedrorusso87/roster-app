@@ -9,3 +9,8 @@
     <button class ="btn btn-primary ml-3" (click)="onNewMatchClicked()">{{'nuevo partido' | titlecase}}</button>
   </div>
 </div>
+<ul>
+  <li *ngFor="let match of matches">
+    {{ match.venue}}
+  </li>
+</ul>
